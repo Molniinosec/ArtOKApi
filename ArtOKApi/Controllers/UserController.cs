@@ -26,5 +26,39 @@ namespace ArtOKApi.Controllers
             }
             return Ok(users);
         }
+
+        [HttpGet("{UserID}")]
+        [ProducesResponseType(200, Type = typeof(User))]
+        [ProducesResponseType(400)]
+        public IActionResult GetUser(int UserID)
+        {
+            if (!_userInterface.UserExists(UserID))
+                return NotFound();
+
+            var users = _userInterface.GetUsers(UserID);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(users);
+        }
+
+        [HttpGet("{UserID}/followers")]
+        [ProducesResponseType(200, Type = typeof(int))]
+        [ProducesResponseType(400)]
+        public IActionResult GetUserFollowers(int UserID)
+        {
+            if (!_userInterface.UserExists(UserID))
+                return NotFound();
+
+            var user = _userInterface.GetUserFollowers(UserID);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(user);
+        }
     }
 }

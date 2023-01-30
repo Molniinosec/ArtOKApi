@@ -9,22 +9,22 @@ namespace ArtOKApi.Data
         {
 
         }
-        public DbSet<Achievement> Achievements { get; set; }
-        public DbSet<Dialog> Dialogs { get; set; }
-        public DbSet<DialogUser> DialogUsers { get; set; }
-        public DbSet<Follower> Followers { get; set; }
-        public DbSet<Like> Likes { get; set; }
-        public DbSet<Message> Messages { get; set; }
-        public DbSet<Picture> Pictures { get; set; }
-        public DbSet<PopApp> PopApps { get; set; }
-        public DbSet<Post> Posts { get; set; }
-        public DbSet<PostComment> PostComments { get; set; }
-        public DbSet<PostPopApp> PostPopApps { get; set; }
-        public DbSet<PostTag> PostTags { get; set; }
-        public DbSet<Repost> Reposts { get; set; }
-        public DbSet<Tag> Tags { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<UserAchievement> UserAchievements { get; set; }
+        public DbSet<Achievement> Achievement { get; set; }
+        public DbSet<Dialog> Dialog { get; set; }
+        public DbSet<DialogUser> DialogUser { get; set; }
+        public DbSet<Follower> Follower { get; set; }
+        public DbSet<Like> Like { get; set; }
+        public DbSet<Message> Message { get; set; }
+        public DbSet<Picture> Picture { get; set; }
+        public DbSet<PopApp> PopApp { get; set; }
+        public DbSet<Post> Post { get; set; }
+        public DbSet<PostComment> PostComment { get; set; }
+        public DbSet<PostPopApp> PostPopApp { get; set; }
+        public DbSet<PostTag> PostTag { get; set; }
+        public DbSet<Repost> Repost { get; set; }
+        public DbSet<Tag> Tag { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<UserAchievement> UserAchievement { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
