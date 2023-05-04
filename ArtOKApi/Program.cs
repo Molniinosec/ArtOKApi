@@ -8,8 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IUserInterface, UserRepository>();
 builder.Services.AddScoped<ITagInterface, TagRepository>();
+builder.Services.AddScoped<IPostInterface, PostRepository>();
+builder.Services.AddScoped<IFollowerInterface, FollowerRepository>();
+builder.Services.AddScoped<ILikeInterface, LikeRepository>();
+builder.Services.AddScoped<IImageInterface, ImageRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

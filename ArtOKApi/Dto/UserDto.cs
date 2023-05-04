@@ -11,5 +11,7 @@
         public System.DateTime TimeOfRegistration { get; set; }
         public System.DateTime Birthday { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
+        public Nullable<bool> IsModerator { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ArtOKApi.Models
 {
@@ -9,5 +10,7 @@ namespace ArtOKApi.Models
         public int PostID { get; set; }
 
         public  Post Post { get; set; }
+        //[NotMapped]
+        //public IFormFile? Ifile { get; set; }
     }
 }

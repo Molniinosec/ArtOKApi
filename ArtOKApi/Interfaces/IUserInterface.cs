@@ -1,4 +1,5 @@
-﻿using ArtOKApi.Models;
+﻿using ArtOKApi.Dto;
+using ArtOKApi.Models;
 
 namespace ArtOKApi.Interfaces
 {
@@ -6,8 +7,10 @@ namespace ArtOKApi.Interfaces
     {
         ICollection<User> GetUsers();
         User GetUsers(int id);
-        User GetUsers(string name);
         int GetUserFollowers(int id);
         bool UserExists(int id);
+        User UserEsists(string login, string password);
+        bool CreateUser(User user);
+        bool Save();
     }
 }
