@@ -6,5 +6,7 @@ namespace ArtOKApi.Interfaces
     {
         ICollection<Follower> GetFollowers();
         ICollection<Follower> GetCurrentUserFollowers(int UserID);
+        int GetFollowersCount(int UserID);
+        int GetFollowedCount(int UserID);
     }
 }

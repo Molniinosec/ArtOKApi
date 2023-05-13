@@ -15,6 +15,9 @@ builder.Services.AddScoped<IPostInterface, PostRepository>();
 builder.Services.AddScoped<IFollowerInterface, FollowerRepository>();
 builder.Services.AddScoped<ILikeInterface, LikeRepository>();
 builder.Services.AddScoped<IImageInterface, ImageRepository>();
+builder.Services.AddScoped<IPostComment,PostCommentRepository>();
+builder.Services.AddScoped<IPopApInterface,PopAppRepository>();
+builder.Services.AddScoped<IDialogUserInterface, DialogUserRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

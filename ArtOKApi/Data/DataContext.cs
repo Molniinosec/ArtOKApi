@@ -14,7 +14,7 @@ namespace ArtOKApi.Data
         public DbSet<DialogUser> DialogUser { get; set; }
         public DbSet<Follower> Follower { get; set; }
         public DbSet<Like> Like { get; set; }
-        public DbSet<Message> Message { get; set; }
+        public DbSet<Messages> Message { get; set; }
         public DbSet<Picture> Picture { get; set; }
         public DbSet<PopApp> PopApp { get; set; }
         public DbSet<Post> Post { get; set; }
@@ -38,6 +38,71 @@ namespace ArtOKApi.Data
                    .HasOne(p => p.FUser)
                    .WithMany(pc => pc.Follower1)
                    .HasForeignKey(p => p.IDFollowedUser);
+
+            modelBuilder.Entity<PostTag>()
+                .HasKey(PT => new { PT.IDTag, PT.IDPost });
+            modelBuilder.Entity<PostTag>()
+                .HasOne(p => p.Tag)
+                .WithMany(pc => pc.PostTag)
+                .HasForeignKey(p => p.IDTag);
+            modelBuilder.Entity<PostTag>()
+               .HasOne(p => p.Post)
+               .WithMany(pc => pc.PostTag)
+               .HasForeignKey(p => p.IDPost);
+
+            modelBuilder.Entity<Like>()
+                .HasKey(L => new { L.IDPost, L.IDUser });
+            modelBuilder.Entity<Like>()
+                .HasOne(p => p.Post)
+                .WithMany(pc => pc.Like)
+                .HasForeignKey(p => p.IDPost);
+            modelBuilder.Entity<Like>()
+               .HasOne(p => p.User)
+               .WithMany(pc => pc.Like)
+               .HasForeignKey(p => p.IDUser);
+
+            modelBuilder.Entity<PostComment>()
+                .HasKey(PC => new { PC.IDPost, PC.IDUser });
+            modelBuilder.Entity<PostComment>()
+                .HasOne(p => p.Post)
+                .WithMany(pc => pc.PostComment)
+                .HasForeignKey(p => p.IDPost);
+            modelBuilder.Entity<PostComment>()
+                .HasOne(p => p.User)
+                .WithMany(pc => pc.PostComment)
+                .HasForeignKey(p => p.IDUser);
+
+            modelBuilder.Entity<PostPopApp>()
+               .HasKey(PC => new { PC.IDPost, PC.IDPopApp });
+            modelBuilder.Entity<PostPopApp>()
+                .HasOne(p => p.Post)
+                .WithMany(pc => pc.PostPopApp)
+                .HasForeignKey(p => p.IDPost);
+            modelBuilder.Entity<PostPopApp>()
+                .HasOne(p => p.PopApp)
+                .WithMany(pc => pc.PostPopApp)
+                .HasForeignKey(p => p.IDPopApp);
+
+            modelBuilder.Entity<DialogUser>()
+              .HasKey(PC => new { PC.IDUser, PC.IDDialog });
+            modelBuilder.Entity<DialogUser>()
+                .HasOne(p => p.User)
+                .WithMany(pc => pc.DialogUser)
+                .HasForeignKey(p => p.IDUser);
+            modelBuilder.Entity<DialogUser>()
+                .HasOne(p => p.Dialog)
+                .WithMany(pc => pc.DialogUser)
+                .HasForeignKey(p => p.IDDialog);
+
+
+            modelBuilder.Entity<DialogUser>()
+             .HasKey(PC => new { PC.ID });
+            modelBuilder.Entity<DialogUser>()
+                .HasMany(p => p.Message)
+                .WithOne(pc => pc.DialogUser)
+                .HasForeignKey(p => p.IDUserDialog);
+
         }
+
     }
 }

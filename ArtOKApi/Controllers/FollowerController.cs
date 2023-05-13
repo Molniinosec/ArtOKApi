@@ -43,5 +43,27 @@ namespace ArtOKApi.Controllers
             }
             return Ok(followers);
         }
+        [HttpGet("CountFollowers/{UserID}")]
+        public IActionResult GetoFollowersCount(int UserID)
+        {
+            var followers = _followerInterface.GetFollowersCount(UserID);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(followers);
+        }
+        [HttpGet("CountFollowed/{UserID}")]
+        public IActionResult GetoFollowedCount(int UserID)
+        {
+            var followers = _followerInterface.GetFollowersCount(UserID);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(followers);
+        }
     }
 }

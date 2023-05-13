@@ -9,7 +9,7 @@ namespace ArtOKApi.Models
         public int IDUser { get; set; }
         public Nullable<System.DateTime> DateOfLike { get; set; }
 
-        public  Post Post { get; set; }
-        public  User User { get; set; }
+        public  Post? Post { get; set; }
+        public  User? User { get; set; }
     }
 }

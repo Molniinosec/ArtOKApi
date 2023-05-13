@@ -12,6 +12,7 @@ namespace ArtOKApi.Models
 
         public  ICollection<Like>? Like { get; set; }
         public  ICollection<Picture>? Picture { get; set; }
+
         public  ICollection<PostTag>? PostTag { get; set; }
         public  ICollection<User>? User { get; set; }
         public  ICollection<PostComment>? PostComment { get; set; }

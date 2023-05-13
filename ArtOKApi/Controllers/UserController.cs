@@ -3,6 +3,7 @@ using ArtOKApi.Interfaces;
 using ArtOKApi.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 
 namespace ArtOKApi.Controllers
 {
@@ -41,7 +42,7 @@ namespace ArtOKApi.Controllers
                 return NotFound();
 
             //var users = _mapper.Map<UserDto>(_userInterface.GetUsers(UserID));
-            var users = _userInterface.GetUsers(UserID);
+            var users = _userInterface.GetUser(UserID);
 
 
             if (!ModelState.IsValid)
@@ -64,7 +65,38 @@ namespace ArtOKApi.Controllers
             }
             return Ok(users);
         }
+        [HttpGet("{UserID}/ProfilePicture")]
+        public IActionResult GetUserProfilePicture(int UserID)
+        {
+            var picture = _userInterface.GetUser(UserID);
+            if (picture != null)
+            {
+                Byte[] b = null;
+                if (picture.ProfilePicture != "" && picture.ProfilePicture != null)
+                {
+                    b = System.IO.File.ReadAllBytes(picture.ProfilePicture);   // You can use your own method over here.         
+                    return File(b, "image/jpeg");
 
+                }
+            }
+            return null;
+        }
+        [HttpGet("{UserID}/ProfileBackGround")]
+        public IActionResult GetProfileBackground(int UserID)
+        {
+            var picture = _userInterface.GetUser(UserID);
+            if (picture != null)
+            {
+                Byte[] b = null;
+                if (picture.BackgroundPicture != "" && picture.BackgroundPicture != null)
+                {
+                    b = System.IO.File.ReadAllBytes(picture.BackgroundPicture);   // You can use your own method over here.         
+                    return File(b, "image/jpeg");
+
+                }
+            }
+            return null;
+        }
 
         [HttpGet("{UserID}/followers")]
         [ProducesResponseType(200, Type = typeof(int))]

@@ -20,6 +20,8 @@ namespace ArtOKApi.Repository
             return Save();
         }
 
+        
+
         public int GetUserFollowers(int id)
         {
             var userFollowers = _context.Follower.Where(f => f.IDFollowedUser == id);
@@ -34,7 +36,7 @@ namespace ArtOKApi.Repository
             return _context.User.OrderBy(u=>u.ID).ToList();
         }
 
-        public User GetUsers(int id)
+        public User GetUser(int id)
         {
             return _context.User.Where(u => u.ID == id).FirstOrDefault();
         }

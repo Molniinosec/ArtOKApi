@@ -18,9 +18,19 @@ namespace ArtOKApi.Repository
             return _context.Follower.Where(f => f.IDCurrentUser == UserID).ToList();
         }
 
+        public int GetFollowedCount(int UserID)
+        {
+            return _context.Follower.Count(f => f.IDFollowedUser == UserID);
+        }
+
         public ICollection<Follower> GetFollowers()
         {
             return _context.Follower.OrderBy(f => f.ID).ToList();
+        }
+
+        public int GetFollowersCount(int UserID)
+        {
+            return _context.Follower.Count(f => f.IDCurrentUser == UserID);
         }
     }
 }
