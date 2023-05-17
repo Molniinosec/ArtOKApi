@@ -7,7 +7,7 @@
         public int IDRepostedPost { get; set; }
         public Nullable<System.DateTime> DateOfRepost { get; set; }
 
-        public  Post Post { get; set; }
-        public  User User { get; set; }
+        public  Post? Post { get; set; }
+        public  User? User { get; set; }
     }
 }

@@ -27,5 +27,17 @@ namespace ArtOKApi.Repository
         {
             return _context.PostPopApp.Where(p => p.IDPost == IDPost).Select(p => p.PopApp).Count();
         }
+
+        public bool Save()
+        {
+            var saved =_context.SaveChanges();
+            return saved>0? true: false;
+        }
+
+        public bool SavePostPopApp(PostPopApp postPopApp)
+        {
+            _context.Add(postPopApp);
+            return Save();
+        }
     }
 }

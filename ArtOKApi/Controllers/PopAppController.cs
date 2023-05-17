@@ -1,4 +1,5 @@
 ﻿using ArtOKApi.Interfaces;
+using ArtOKApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArtOKApi.Controllers
@@ -47,6 +48,24 @@ namespace ArtOKApi.Controllers
                 return BadRequest(ModelState);
             }
             return Ok(comments);
+        }
+        [HttpPost("AddPopApp")]
+        public IActionResult AddPostPopApp(PostPopApp postPopApp)
+        {
+            if (postPopApp == null)
+                return BadRequest(ModelState);
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+
+            if (!_comment.SavePostPopApp(postPopApp))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Succesfuly created");
         }
     }
 }

@@ -72,6 +72,17 @@ namespace ArtOKApi.Data
                 .WithMany(pc => pc.PostComment)
                 .HasForeignKey(p => p.IDUser);
 
+            modelBuilder.Entity<Repost>()
+               .HasKey(PT => new { PT.IDUser, PT.IDRepostedPost });
+            modelBuilder.Entity<Repost>()
+                .HasOne(p => p.User)
+                .WithMany(pc => pc.Repost)
+                .HasForeignKey(p => p.IDUser);
+            modelBuilder.Entity<Repost>()
+               .HasOne(p => p.Post)
+               .WithMany(pc => pc.Repost)
+               .HasForeignKey(p => p.IDRepostedPost);
+
             modelBuilder.Entity<PostPopApp>()
                .HasKey(PC => new { PC.IDPost, PC.IDPopApp });
             modelBuilder.Entity<PostPopApp>()

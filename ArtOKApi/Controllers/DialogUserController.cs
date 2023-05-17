@@ -47,5 +47,22 @@ namespace ArtOKApi.Controllers
             }
             return Ok(comments);
         }
+        [HttpPost("MessageAdd")]
+        public IActionResult AddMessage([FromBody]Messages message)
+        {
+            if (message == null)
+                return BadRequest(ModelState);
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_comment.AddMessage(message))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Succesfuly created");
+        }
     }
 }

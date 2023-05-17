@@ -47,6 +47,84 @@ namespace ArtOKApi.Controllers
             }
             return Ok(post);
         }
+        [HttpGet("AllRepostsIn-{IDPost}")]
+        public IActionResult GetRepostInPost(int IDPost)
+        {
+            var post = _postInterface.GetRepostInPost(IDPost);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(post);
+        }
+        [HttpGet("AllUserReposts-{IDUser}")]
+        public IActionResult GetUserReposts(int IDUser)
+        {
+            var post = _postInterface.GetUserReposts(IDUser);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(post);
+        }
+        [HttpGet("AllReposts")]
+        public IActionResult GetAllReposts()
+        {
+            var post = _postInterface.GetReposts();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(post);
+        }
+        [HttpGet("RepostCount-{IDPost}")]
+        public IActionResult GetRepostCount(int IDPost)
+        {
+            var post = _postInterface.RepostCount(IDPost);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(post);
+        }
+
+        [HttpPost("AddReost")]
+        public IActionResult AddRepost(Repost repost)
+        {
+            if (repost == null)
+                return BadRequest(ModelState);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var postMap = repost;
+
+            if (!_postInterface.CreateRepost(repost))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Succesfuly created");
+        }
+        [HttpDelete("DeleteRepost-{IDRepost}")]
+        public IActionResult DeleteRepost(int IDRepost)
+        {
+            if (IDRepost == null)
+                return BadRequest(ModelState);
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var delLike = _postInterface.GetSingleRepost(IDRepost);
+
+            if (!_postInterface.DeleteRepost(delLike))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Succesfuly deleted");
+        }
 
         [HttpPost("CreatePost")]
         [ProducesResponseType(204)]
