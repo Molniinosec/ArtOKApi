@@ -55,7 +55,12 @@ namespace ArtOKApi.Controllers
         //    }
         //    return Ok("Succesfuly created");
         //}
-
+        [HttpPost("SaveFileInFolder")]
+        public IActionResult SaveFileInFolder([FromBody] FilePic filePic)
+        {
+            string path = _imageInterface.CreateFilePicture(filePic);
+            return Ok(path);
+        }
         [HttpPost("PicturePath")]
         public IActionResult SavePictureFile([FromBody] FilePic filePic)
         {

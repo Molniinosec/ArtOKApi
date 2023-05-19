@@ -10,7 +10,7 @@ namespace ArtOKApi.Interfaces
         int GetUserFollowers(int id);
         bool UserExists(int id);
         User UserEsists(string login, string password);
-        
+        bool UpdateUser(User user);
         bool CreateUser(User user);
         bool Save();
     }

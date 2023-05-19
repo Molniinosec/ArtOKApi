@@ -11,12 +11,12 @@ namespace ArtOKApi.Controllers
     public class PostController : Controller
     {
         private readonly IPostInterface _postInterface;
-        private readonly IMapper _mapper;
 
-        public PostController(IPostInterface postInterface, IMapper mapper)
+
+        public PostController(IPostInterface postInterface)
         {
             _postInterface = postInterface;
-            _mapper = mapper;
+
         }
 
         [HttpGet]

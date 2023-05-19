@@ -12,12 +12,10 @@ namespace ArtOKApi.Controllers
     public class UserController : Controller
     {
         private readonly IUserInterface _userInterface;
-        private readonly IMapper _mapper;
 
-        public UserController(IUserInterface userInterface, IMapper mapper)
+        public UserController(IUserInterface userInterface)
         {
             _userInterface = userInterface;
-            _mapper = mapper;
         }
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<User>))]
@@ -41,7 +39,6 @@ namespace ArtOKApi.Controllers
             if (!_userInterface.UserExists(UserID))
                 return NotFound();
 
-            //var users = _mapper.Map<UserDto>(_userInterface.GetUsers(UserID));
             var users = _userInterface.GetUser(UserID);
 
 
@@ -74,6 +71,7 @@ namespace ArtOKApi.Controllers
                 Byte[] b = null;
                 if (picture.ProfilePicture != "" && picture.ProfilePicture != null)
                 {
+
                     b = System.IO.File.ReadAllBytes(picture.ProfilePicture);   // You can use your own method over here.         
                     return File(b, "image/jpeg");
 
@@ -142,6 +140,25 @@ namespace ArtOKApi.Controllers
                 return StatusCode(500, ModelState);
             }
             return Ok("Succesfuly created");
+        }
+        [HttpPut("UpdateUser")]
+        public IActionResult UpdateUser([FromBody] User updateUser)
+        {
+            if (updateUser == null)
+                return BadRequest(ModelState);
+
+            var user = _userInterface.GetUsers().Where(u => u.NickName == updateUser.NickName).FirstOrDefault();
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_userInterface.UpdateUser(updateUser))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
         }
     }
 }

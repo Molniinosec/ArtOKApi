@@ -2,13 +2,13 @@ using ArtOKApi.Data;
 using ArtOKApi.Interfaces;
 using ArtOKApi.Repository;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IUserInterface, UserRepository>();
 builder.Services.AddScoped<ITagInterface, TagRepository>();
 builder.Services.AddScoped<IPostInterface, PostRepository>();
@@ -19,12 +19,14 @@ builder.Services.AddScoped<IPostComment,PostCommentRepository>();
 builder.Services.AddScoped<IPopApInterface,PopAppRepository>();
 builder.Services.AddScoped<IDialogUserInterface, DialogUserRepository>();
 
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 
 var app = builder.Build();

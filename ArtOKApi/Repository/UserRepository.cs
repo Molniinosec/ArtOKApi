@@ -2,6 +2,7 @@
 using ArtOKApi.Dto;
 using ArtOKApi.Interfaces;
 using ArtOKApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ArtOKApi.Repository
 {
@@ -57,6 +58,10 @@ namespace ArtOKApi.Repository
             return _context.User.Any(u => u.ID == id);
         }
 
-
+        public bool UpdateUser(User user)
+        {
+            _context.Update(user);
+            return Save();
+        }
     }
 }

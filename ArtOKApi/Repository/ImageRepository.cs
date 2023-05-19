@@ -28,14 +28,16 @@ namespace ArtOKApi.Repository
         //    }
         //    return path;
         //}
-       
+
 
         public string CreateFilePicture(FilePic Ifile)
         {
-            //string path = _imageInterface.CreateFilePicture( Ifile);
-            string path = Path.Combine(@"C:\\Users\\izran\\source\\repos\\ArtOKApi\\ArtOKApi\\wwwroot\\Uploads",
+            
+            //string path = Path.Combine(@"C:\\Users\\izran\\source\\repos\\ArtOKApi\\ArtOKApi\\wwwroot\\Uploads",
+                                     // (Convert.ToString(DateTime.Now.Ticks)));
+
+            string path = Path.Combine(@"C:\Users\izran\source\repos\ArtOKApi\ArtOKApi\wwwroot\Uploads",
                                       (Convert.ToString(DateTime.Now.Ticks)));
-            //+ filePic.Ifile.FileName);
 
             File.WriteAllBytes(path, Ifile.byteFile);
 
