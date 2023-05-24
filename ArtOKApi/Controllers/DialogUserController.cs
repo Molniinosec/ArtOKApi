@@ -14,6 +14,19 @@ namespace ArtOKApi.Controllers
         {
             _comment = post;
         }
+
+        [HttpGet("AllDialogs")]
+        public IActionResult GetDialogs()
+        {
+            var comments = _comment.GetDialogs();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(comments);
+        }
+
         [HttpGet("{IDUser}")]
         public IActionResult GetUserDialogs(int IDUser)
         {
@@ -58,6 +71,40 @@ namespace ArtOKApi.Controllers
                 return BadRequest(ModelState);
 
             if (!_comment.AddMessage(message))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Succesfuly created");
+        }
+        [HttpPost("CreateDialog")]
+        public IActionResult CreateDialog([FromBody]Dialog dialog)
+        {
+            if (dialog == null)
+                return BadRequest(ModelState);
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_comment.CreateDialog(dialog))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Succesfuly created");
+        }
+        [HttpPost("AddUserInDialog")]
+        public IActionResult AddUserInDialog([FromBody] DialogUser DialogUser)
+        {
+            if (DialogUser == null)
+                return BadRequest(ModelState);
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_comment.AddUserInDialog(DialogUser))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
                 return StatusCode(500, ModelState);

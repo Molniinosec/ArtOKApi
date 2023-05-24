@@ -14,9 +14,22 @@ namespace ArtOKApi.Repository
             _context = context;
         }
 
+
         public bool AddMessage(Messages message)
         {
             _context.Add(message);
+            return Save();
+        }
+
+        public bool AddUserInDialog(DialogUser dialog)
+        {
+            _context.Add(dialog);
+            return Save();
+        }
+
+        public bool CreateDialog(Dialog dialog)
+        {
+            _context.Add(dialog);
             return Save();
         }
 
@@ -28,6 +41,11 @@ namespace ArtOKApi.Repository
         public ICollection<Messages> GetDialogMessages(int IDDialog)
         {
             return _context.Message.Where(m => m.IDUserDialog == IDDialog).ToList();
+        }
+
+        public ICollection<Dialog> GetDialogs()
+        {
+            return _context.Dialog.OrderByDescending(d=>d.ID).ToList();
         }
 
         public ICollection<Dialog> GetUserDialogs(int IDUser)

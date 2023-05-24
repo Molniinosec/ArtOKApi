@@ -38,7 +38,6 @@ namespace ArtOKApi.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetUserPosts(int IDuser)
         {
-            //var post = _mapper.Map<PostDto>(_postInterface.GetUserPosts(IDuser));
             var post = _postInterface.GetUserPosts(IDuser);
 
             if (!ModelState.IsValid)

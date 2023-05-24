@@ -65,5 +65,40 @@ namespace ArtOKApi.Controllers
             }
             return Ok(followers);
         }
+        [HttpPost("AddFollower")]
+        public IActionResult AddFollower(Follower follower)
+        {
+            if (follower == null)
+                return BadRequest(ModelState);
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_followerInterface.AddFollower(follower))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Succesfuly created");
+        }
+        [HttpDelete("Delete-{IDFollower}")]
+        public IActionResult DeleteFollower(int IDFollower)
+        {
+            if (IDFollower == null)
+                return BadRequest(ModelState);
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var DelFollower = _followerInterface.GetFollowerByID(IDFollower);
+
+            if (!_followerInterface.RemoveFollower(DelFollower))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Succesfuly created");
+        }
     }
 }

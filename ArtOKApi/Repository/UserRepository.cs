@@ -48,9 +48,9 @@ namespace ArtOKApi.Repository
             return saved>0 ? true : false;
         }
 
-        public User UserEsists(string login, string password)
+        public User UserEsists(string Mail, string password)
         {
-            return _context.User.Where(u => u.NickName == login && u.Password== password).FirstOrDefault();
+            return _context.User.Where(u => u.Email == Mail && u.Password== password).FirstOrDefault();
         }
 
         public bool UserExists(int id)

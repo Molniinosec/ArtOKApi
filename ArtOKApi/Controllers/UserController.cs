@@ -51,9 +51,9 @@ namespace ArtOKApi.Controllers
         [HttpGet("UserExist")]
         [ProducesResponseType(200, Type = typeof(User))]
         [ProducesResponseType(400)]
-        public IActionResult UserExist(string login, string password)
+        public IActionResult UserExist(string mail, string password)
         {
-            var users = _userInterface.UserEsists(login, password);
+            var users = _userInterface.UserEsists(mail, password);
             if (users is null)
                 return NotFound();
             if (!ModelState.IsValid)
